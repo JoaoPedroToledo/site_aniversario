@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nossas Lembranças</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <nav>
+      <a href="#inicio" data-page="inicio">Início</a>
+      <a href="#lembrancas" data-page="lembrancas">Lembranças</a>
+      <a href="#fotos" data-page="fotos">Fotos</a>
+    </nav>
+    <div class="nav-right">
+    <button id="play-toggle" aria-label="Tocar música">▶️</button>
+  </div>
+
+  <!-- áudio escondido, controlado via JS -->
+  <audio id="bg-music">
+    <source src="musica.mp3" type="audio/mp3">
+  </audio>
+  </header>
+
+  <main id="app">
+    <section id="page-inicio" class="page active">
+        <div class="hero">
+            <h1>Nosso Cantinho 💕</h1>
+            <p class="subtitulo">
+            Um espaço só nosso, cheio de memórias, fotos e tudo que vivemos juntos.
+            </p>
+
+            <div class="declaracao">
+            <p>
+                Eu amo o nosso companheirismo, a forma como a gente se entende até no silêncio
+                e transforma qualquer momento simples em algo especial.
+            </p>
+            <p>
+                Cada dia ao seu lado me mostra que a vida faz mais sentido quando é vivida junto de você,
+                dividindo sonhos, risadas, planos e até os desafios.
+            </p>
+            <p>
+                Você é meu porto seguro, minha alegria diária e a pessoa com quem eu quero
+                construir um futuro cheio de amor, companheirismo e alegrias.
+            </p>    
+            <p>
+                Eu escolho te viver em cada detalhe, em cada abraço e em cada pedaço de futuro que a gente
+                constrói juntos, porque estar contigo é o meu lugar favorito no mundo.
+            </p>
+            <p>
+                Te amo hoje e sempre.
+                Obrigado por ser você, seja essa mulher incrível que sempre me inspira a ser uma pessoa melhor.
+                Nunca desista do seus sonhos, estarei sempre ao seu lado para te apoiar e amar incondicionalmente.
+                A sua alegria, é o que me deixa mais feliz nesse mundo.
+                Te amo demais, minha Isinha! ❤️
+            </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="page-lembrancas" class="page">
+        <h1>Lembranças</h1>
+
+        <article class="lembranca">
+            <h2>Nossa primeira viagem</h2>
+            <p>O dia em que saímos da rotina e descobrimos que qualquer lugar é especial quando estou com você.</p>
+            <video controls class="lembranca-video">
+            <source src="videos/viagem1.mp4" type="video/mp4">
+            Seu navegador não suporta vídeo.
+            </video>
+        </article>
+
+        <article class="lembranca">
+            <h2>Um dia comum perfeito</h2>
+            <p>A gente em casa, risadas, filmes e abraços — nada de extraordinário, mas tudo inesquecível.</p>
+            <video controls class="lembranca-video">
+            <source src="videos/dia_comum.mp4" type="video/mp4">
+            </video>
+        </article>
+    </section>
+
+
+    <section id="page-fotos" class="page">
+        <h1>Fotos</h1>
+
+        <div class="filtro-fotos">
+            <button data-album="familia" class="album-btn active-album">Família</button>
+            <button data-album="namorado" class="album-btn">Namorado</button>
+        </div>
+        <div id="album-familia" class="album active-album">
+            <div class="slider">
+                <button class="slide-btn prev" data-target="familia">❮</button>
+                <div class="slides" data-album-slides="familia">
+                    <img src="imagens/familia/1.jpg" alt="Família 1" class="slide active">
+                    <img src="imagens/familia/2.jpg" alt="Família 2" class="slide">
+                    <img src="imagens/familia/3.jpg" alt="Família 3" class="slide">
+                    <img src="imagens/familia/4.jpg" alt="Família 1" class="slide">
+                    <img src="imagens/familia/5.jpg" alt="Família 2" class="slide">
+                    <img src="imagens/familia/6.jpg" alt="Família 3" class="slide">
+                    <img src="imagens/familia/7.jpg" alt="Família 1" class="slide">
+                    <img src="imagens/familia/8.jpg" alt="Família 2" class="slide">
+                    <img src="imagens/familia/9.jpg" alt="Família 3" class="slide">
+                    <img src="imagens/familia/10.jpg" alt="Família 1" class="slide">
+                    <img src="imagens/familia/11.jpg" alt="Família 2" class="slide">
+                    <img src="imagens/familia/12.jpg" alt="Família 3" class="slide">
+                </div>
+                <button class="slide-btn next" data-target="familia">❯</button>
+            </div>
+        </div>
+         <div id="album-namorado" class="album">
+            <div class="slider">
+                <button class="slide-btn prev" data-target="namorado">❮</button>
+                    <div class="slides" data-album-slides="namorado">
+                        <img src="imagens/namorado/1.jpg" alt="Namorado 1" class="slide active">
+                        <img src="imagens/namorado/2.jpg" alt="Namorado 2" class="slide">
+                        <img src="imagens/namorado/3.jpg" alt="Namorado 3" class="slide">
+                    </div>
+                <button class="slide-btn next" data-target="namorado">❯</button>
+            </div>
+        </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>Feito com carinho para minha Isinha ❤️</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+}
+
+/* NAVBAR FIXO NO TOPO */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: #111827;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* esquerda x direita */
+  padding: 0 1rem;
+  z-index: 1000;
+}
+
+.nav-right #play-toggle {
+  background: gray;
+  border: none;
+  color: #111827;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.navbar nav a {
+  color: #e5e7eb;
+  text-decoration: none;
+  margin: 0 1rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.navbar nav a:hover,
+.navbar nav a.active-link {
+  background: white;
+  color: #111827;
+}
+
+/* ÁREA DE CONTEÚDO */
+#app {
+  padding-top: 70px;   /* compensa o navbar */
+  padding-bottom: 60px; /* compensa o footer */
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* PÁGINAS DA SPA */
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+.hero {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.hero h1 {
+  font-size: 2.2rem;
+  color: red;
+  margin-bottom: 0.5rem;
+}
+
+.hero .subtitulo {
+  font-size: 1rem;
+  color: black;
+  margin-bottom: 1.5rem;
+}
+
+.declaracao {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: left;
+  background: rgba(15,23,42,0.9);
+  border-radius: 12px;
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+  border: 1px solid rgba(249,115,22,0.3);
+}
+
+.declaracao p {
+  color: #e5e7eb;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.declaracao p:last-child {
+  margin-bottom: 0;
+}
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 0.75rem 0 1.5rem;
+}
+
+.galeria img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+#page-lembrancas {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 2rem;
+}
+
+#page-lembrancas h1 {
+  font-size: 1.8rem;
+  color: #f97316;
+  margin-bottom: 1rem;
+}
+
+.lembranca {
+  margin-bottom: 2rem;
+  background: rgba(15,23,42,0.9);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid rgba(249,115,22,0.25);
+}
+
+.lembranca h2 {
+  color: #fbbf24;
+  margin-bottom: 0.5rem;
+}
+
+.lembranca p {
+  color: #e5e7eb;
+  margin-bottom: 0.75rem;
+}
+
+.lembranca-video {
+  width: 100%;
+  border-radius: 10px;
+  max-height: 360px;
+  object-fit: cover;
+}
+
+
+.filtro-fotos {
+  margin-bottom: 1rem;
+}
+
+.album {
+  display: none;
+}
+
+.album.active-album {
+  display: block;
+}
+
+.filtro-fotos {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.album-btn {
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid gray;
+  background: transparent;
+  color: gray;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.album-btn.active-album {
+  background: gray;
+  color: #111827;
+}
+
+.album {
+  display: none;
+}
+
+.album.active-album {
+  display: block;
+}
+
+/* Carrossel */
+.slider {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+  background: #020617;  /* mesmo tom do site ou preto */
+}
+
+.slides {
+  position: relative;
+  width: 100%;
+}
+
+.slide {
+  display: none;
+  width: 100%;
+  height: 420px;
+  object-fit: contain;   /* mostra a foto inteira */
+  background: #020617;   /* mesma cor do .slider */
+}
+
+.slide.active {
+  display: block;
+}
+
+
+
+/* Botões de navegação do carrossel */
+.slide-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(17,24,39,0.7);
+  border: none;
+  color: #f9fafb;
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+  border-radius: 999px;
+  font-size: 1.1rem;
+}
+
+.slide-btn.prev {
+  left: 10px;
+}
+
+.slide-btn.next {
+  right: 10px;
+}
+
+
+/* FOOTER FIXO EMBAIXO */
+.footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 50px;
+  background: #111827;
+  color: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
