@@ -249,3 +249,43 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
+// VARIÁVEL DE SENHA (MUITO IMPORTANTE: esta senha fica visível no código fonte!)
+const CORRECT_PASSWORD = 'sua-senha-secreta'; 
+
+const lockScreen = document.getElementById('lock-screen');
+const passwordInput = document.getElementById('password-input');
+const accessButton = document.getElementById('access-button');
+const errorMessage = document.getElementById('error-message');
+
+function attemptAccess() {
+  const CORRECT_PASSWORD = '070820';
+    const enteredPassword = passwordInput.value;
+
+    if (enteredPassword === CORRECT_PASSWORD) {
+        // Senha correta: Esconde a tela de bloqueio
+        lockScreen.style.display = 'none'; 
+        // Opcional: Salvar no localStorage para não pedir a senha novamente na mesma sessão
+        localStorage.setItem('hasAccess', 'true');
+    } else {
+        // Senha incorreta: Mostra mensagem de erro
+        errorMessage.classList.remove('hidden-error');
+        passwordInput.value = ''; // Limpa o campo
+        passwordInput.focus();
+    }
+}
+
+// Verifica se o usuário já tem acesso (se salvou no localStorage)
+if (localStorage.getItem('hasAccess') === 'true') {
+    lockScreen.style.display = 'none';
+}
+
+// Adiciona listener ao botão
+accessButton.addEventListener('click', attemptAccess);
+
+// Permite acessar com a tecla Enter
+passwordInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        attemptAccess();
+    }
+});
