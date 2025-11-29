@@ -11,42 +11,114 @@ body {
 
 /* NAVBAR FIXO NO TOPO */
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  background: #111827;
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* esquerda x direita */
-  padding: 0 1rem;
-  z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: black; /* Fundo escuro semi-transparente */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* Sombra para profundidade */
+    border-bottom: 2px solid rgba(249, 115, 22, 0.1); /* Borda sutil */
 }
 
-.nav-right #play-toggle {
-  background: gray;
-  border: none;
-  color: #111827;
-  padding: 0.4rem 0.8rem;
-  border-radius: 999px;
-  cursor: pointer;
-  font-size: 0.9rem;
+/* Estilo do Botão Escolher Música */
+.nav-right #music-toggle {
+    /* Cor de Destaque */
+    background: gray; /* Laranja Sólido (Cor de Destaque do Tema) */
+    border: none;
+    color: #111827; /* Texto escuro para alto contraste */
+    
+    /* Formato e Tipografia */
+    padding: 0.5rem 1rem;
+    border-radius: 999px; /* Botão pills/arredondado */
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600; /* Texto mais forte */
+    
+    /* Transições suaves */
+    transition: background 0.3s ease, transform 0.1s ease;
 }
 
+/* Efeito ao passar o mouse (Hover) */
+.nav-right #music-toggle:hover {
+    background: #fbbf24; /* Um tom mais claro/amarelado no hover */
+    /* Sombra sutil para dar profundidade */
+    box-shadow: 0 0 8px rgba(249, 115, 22, 0.6); 
+}
+
+/* Efeito ao clicar (Active/Pressionar) */
+.nav-right #music-toggle:active {
+    transform: scale(0.98); /* Pequeno encolhimento para feedback tátil */
+}
+
+/* Garante que o texto do botão de toggle seja alinhado e tratado corretamente */
+.nav-right {
+    position: relative; /* Essencial para o posicionamento do dropdown */
+}
+
+/* Links de Navegação */
 .navbar nav a {
   color: #e5e7eb;
   text-decoration: none;
-  margin: 0 1rem;
-  padding: 0.4rem 0.8rem;
+  margin: 0 0.8rem;
+  padding: 0.5rem 1rem;
   border-radius: 999px;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s; /* Transições suaves */
+  font-weight: 500; /* Fonte um pouco mais ousada */
 }
 
-.navbar nav a:hover,
+.navbar nav a:hover {
+  background: rgba(255, 255, 255, 0.1); /* Fundo sutilmente claro no hover */
+  color: white; /* Cor de destaque para o texto no hover (Laranja) */
+  box-shadow: 0 0 5px white; /* Sombra sutil de destaque */
+}
+
 .navbar nav a.active-link {
-  background: white;
-  color: #111827;
+  background: white; /* Laranja sólido para o link ativo */
+  color: #111827; /* Texto escuro no link ativo */
+  font-weight: 700;
+}
+
+/* Estilo básico para a lista de música */
+#music-list-container {
+    position: absolute; /* Essencial para o dropdown */
+    top: 60px; /* Posiciona logo abaixo do navbar */
+    right: 1.5rem; /* Alinha com o padding do navbar */
+    background: #111827;
+    border: 1px solid rgba(249, 115, 22, 0.3);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    padding: 0.5rem 0;
+    width: 250px;
+    z-index: 999;
+}
+.hidden {
+    display: none;
+}
+#music-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#music-list li {
+  padding: 0.5rem 1rem;
+  color: #e5e7eb;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#music-list li:hover {
+  background: rgba(249, 115, 22, 0.2); /* Destaque laranja suave no hover */
 }
 
 /* ÁREA DE CONTEÚDO */
@@ -72,13 +144,13 @@ body {
 
 .hero h1 {
   font-size: 2.2rem;
-  color: red;
+  color: whitesmoke;
   margin-bottom: 0.5rem;
 }
 
 .hero .subtitulo {
   font-size: 1rem;
-  color: black;
+  color: whitesmoke;
   margin-bottom: 1.5rem;
 }
 
@@ -86,23 +158,30 @@ body {
   max-width: 720px;
   margin: 0 auto;
   text-align: left;
-  background: rgba(15,23,42,0.9);
-  border-radius: 12px;
-  padding: 1.5rem 1.75rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
-  border: 1px solid rgba(249,115,22,0.3);
+  background: black; /* Aumenta a opacidade do fundo */
+  border-radius: 16px; /* Aumenta levemente o arredondamento */
+  padding: 1.75rem 2rem; /* Aumenta um pouco o padding interno */
+  
+  /* Sombra mais suave e intensa */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5); 
+  
+  /* Borda mais visível, combinando com o destaque laranja */
+  border: 2px solid darkgray; 
 }
 
 .declaracao p {
   color: #e5e7eb;
-  line-height: 1.6;
-  margin-bottom: 0.75rem;
+  line-height: 1.7; /* Aumenta um pouco mais o espaçamento entre linhas */
+  margin-bottom: 1rem; /* Aumenta o espaçamento entre parágrafos */
+  font-size: 1.05rem; /* Deixa a fonte ligeiramente maior para leitura */
+  
+  /* Adiciona um efeito sutil de destaque no texto */
+  text-shadow: 0 0 2px rgba(249, 115, 22, 0.1); 
 }
 
 .declaracao p:last-child {
   margin-bottom: 0;
 }
-
 .galeria {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -124,20 +203,24 @@ body {
 
 #page-lembrancas h1 {
   font-size: 1.8rem;
-  color: #f97316;
+  color: whitesmoke;
   margin-bottom: 1rem;
 }
 
 .lembranca {
   margin-bottom: 2rem;
-  background: rgba(15,23,42,0.9);
+  background: black;
   border-radius: 12px;
   padding: 1.25rem 1.5rem;
-  border: 1px solid rgba(249,115,22,0.25);
+  /* ALTERAÇÃO: Borda de Laranja para Cinza Escuro */
+  border: 1px solid rgba(75, 85, 99, 0.5); /* Usando #4b5563 com 50% de opacidade */
+  /* Opcional: Adicionar uma sombra sutil para profundidade */
+  box-shadow: 0 4px 10px black;
 }
 
 .lembranca h2 {
-  color: #fbbf24;
+  /* ALTERAÇÃO: Título de Amarelo para Cinza Claro/Sutil */
+  color: #9ca3af; /* Cinza claro para o título */
   margin-bottom: 0.5rem;
 }
 
@@ -152,7 +235,6 @@ body {
   max-height: 360px;
   object-fit: cover;
 }
-
 
 .filtro-fotos {
   margin-bottom: 1rem;
@@ -173,18 +255,31 @@ body {
 }
 
 .album-btn {
-  padding: 0.4rem 0.9rem;
+  /* Padding e Tipografia permanecem */
+  padding: 0.5rem 1rem;
   border-radius: 999px;
-  border: 1px solid gray;
-  background: transparent;
-  color: gray;
-  cursor: pointer;
   font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+  
+  /* Cores de Tema: Inativo */
+  border: 1px solid #6b7280; /* Um cinza mais definido */
+  background: transparent;
+  color: #d1d5db; /* Cor de texto clara para o fundo escuro do site */
+}
+/* Efeito ao passar o mouse */
+.album-btn:hover {
+  border-color: gray; /* Borda laranja no hover */
+  color: gray; /* Texto laranja no hover */
+  background: rgba(249, 115, 22, 0.1); /* Fundo laranja bem suave */
 }
 
+/* Estado Ativo do Botão */
 .album-btn.active-album {
-  background: gray;
-  color: #111827;
+  background: gray; /* Laranja sólido (cor de destaque) */
+  color: #111827; /* Texto escuro em contraste */
+  border-color: gray;
+  font-weight: 600; /* Destaque o texto do botão ativo */
 }
 
 .album {
@@ -202,8 +297,9 @@ body {
   margin: 0 auto;
   overflow: hidden;
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
-  background: #020617;  /* mesmo tom do site ou preto */
+  /* Sombra mais pronunciada e com cor de destaque */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(249, 115, 22, 0.2); 
+  background: #020617; 
 }
 
 .slides {
@@ -214,9 +310,19 @@ body {
 .slide {
   display: none;
   width: 100%;
-  height: 420px;
-  object-fit: contain;   /* mostra a foto inteira */
-  background: #020617;   /* mesma cor do .slider */
+  height: auto; /* Alterado de 420px para 'auto' */
+  max-height: 480px; /* Definindo uma altura máxima para controle */
+  object-fit: contain;
+  background: #020617;
+  /* Transição suave para a troca de slides, se usado com JS */
+  transition: opacity 0.4s ease-in-out; 
+}
+
+/* Revertendo a altura para telas muito pequenas, se necessário, ou use Media Queries */
+@media (max-width: 600px) {
+  .slide {
+    max-height: 300px;
+  }
 }
 
 .slide.active {
@@ -230,23 +336,31 @@ body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(17,24,39,0.7);
+  background: gray; /* Fundo Laranja Semi-transparente */
   border: none;
-  color: #f9fafb;
-  padding: 0.4rem 0.6rem;
+  color: #111827; /* Cor escura para o ícone/texto */
+  padding: 0.7rem 0.9rem; /* Aumentei o padding */
   cursor: pointer;
-  border-radius: 999px;
-  font-size: 1.1rem;
+  border-radius: 50%; /* Torna o botão um círculo perfeito */
+  font-size: 1.2rem; /* Ícone/Texto maior */
+  line-height: 1;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 10; /* Garante que os botões fiquem acima das imagens */
+}
+
+.slide-btn:hover {
+  background: #fbbf24; /* Amarelo/Laranja Claro no hover */
+  transform: translateY(-50%) scale(1.05); /* Pequeno aumento no tamanho */
+  box-shadow: 0 0 10px rgba(249, 115, 22, 0.8);
 }
 
 .slide-btn.prev {
-  left: 10px;
+  left: 15px; /* Mais afastado da borda */
 }
 
 .slide-btn.next {
-  right: 10px;
+  right: 15px; /* Mais afastado da borda */
 }
-
 
 /* FOOTER FIXO EMBAIXO */
 .footer {
@@ -255,9 +369,28 @@ body {
   right: 0;
   bottom: 0;
   height: 50px;
-  background: #111827;
+  /* Fundo ligeiramente transparente, igual ao navbar, para coesão */
+  background: black; 
   color: #e5e7eb;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1000; /* Garante que fique acima de outros elementos */
+
+  /* Sombra para dar profundidade na parte superior */
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.4); 
+  
+  /* Borda sutil na cor de destaque */
+  border-top: 2px solid rgba(249, 115, 22, 0.1); 
+  
+  /* Tipografia */
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+body {
+  min-height: 100vh;
+  /* Exemplo: Um cinza muito escuro, mas não totalmente preto */
+  background-color: #353a41;
+  color: #e5e7eb; /* Adapte a cor do texto padrão para o fundo escuro */
 }

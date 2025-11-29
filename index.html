@@ -8,19 +8,24 @@
 <body>
   <header class="navbar">
     <nav>
-      <a href="#inicio" data-page="inicio">Início</a>
-      <a href="#lembrancas" data-page="lembrancas">Lembranças</a>
-      <a href="#fotos" data-page="fotos">Fotos</a>
+        <a href="#inicio" data-page="inicio" class="active-link">Início</a>
+        <a href="#lembrancas" data-page="lembrancas">Lembranças</a>
+        <a href="#fotos" data-page="fotos">Fotos</a>
     </nav>
+    
     <div class="nav-right">
-    <button id="play-toggle" aria-label="Tocar música">▶️</button>
-  </div>
+        <button id="music-toggle" aria-label="Escolher Música">
+            Escolher Música
+        </button>
 
-  <!-- áudio escondido, controlado via JS -->
-  <audio id="bg-music">
-    <source src="musica.mp3" type="audio/mp3">
-  </audio>
-  </header>
+        <div id="music-list-container" class="hidden">
+            <ul id="music-list">
+                </ul>
+        </div>
+    </div>
+</header>
+
+<audio id="audio-player" src=""></audio>
 
   <main id="app">
     <section id="page-inicio" class="page active">
@@ -62,19 +67,19 @@
         <h1>Lembranças</h1>
 
         <article class="lembranca">
-            <h2>Nossa primeira viagem</h2>
-            <p>O dia em que saímos da rotina e descobrimos que qualquer lugar é especial quando estou com você.</p>
+            <h2>Famiy Day</h2>
+            <p>Um dia muito especial de fotos e declarações da família para você.</p>
             <video controls class="lembranca-video">
-            <source src="videos/viagem1.mp4" type="video/mp4">
+            <source src="videos/Family Day.mp4" type="video/mp4">
             Seu navegador não suporta vídeo.
             </video>
         </article>
 
         <article class="lembranca">
-            <h2>Um dia comum perfeito</h2>
-            <p>A gente em casa, risadas, filmes e abraços — nada de extraordinário, mas tudo inesquecível.</p>
+            <h2>Formatura</h2>
+            <p>O dia de uma das maiores conquistas da vida.</p>
             <video controls class="lembranca-video">
-            <source src="videos/dia_comum.mp4" type="video/mp4">
+            <source src="videos/Formatura.mp4" type="video/mp4">
             </video>
         </article>
     </section>
@@ -86,6 +91,7 @@
         <div class="filtro-fotos">
             <button data-album="familia" class="album-btn active-album">Família</button>
             <button data-album="namorado" class="album-btn">Namorado</button>
+            <button data-album="aurorinha" class="album-btn">Aurorinha</button>
         </div>
         <div id="album-familia" class="album active-album">
             <div class="slider">
@@ -94,15 +100,15 @@
                     <img src="imagens/familia/1.jpg" alt="Família 1" class="slide active">
                     <img src="imagens/familia/2.jpg" alt="Família 2" class="slide">
                     <img src="imagens/familia/3.jpg" alt="Família 3" class="slide">
-                    <img src="imagens/familia/4.jpg" alt="Família 1" class="slide">
-                    <img src="imagens/familia/5.jpg" alt="Família 2" class="slide">
-                    <img src="imagens/familia/6.jpg" alt="Família 3" class="slide">
-                    <img src="imagens/familia/7.jpg" alt="Família 1" class="slide">
-                    <img src="imagens/familia/8.jpg" alt="Família 2" class="slide">
-                    <img src="imagens/familia/9.jpg" alt="Família 3" class="slide">
-                    <img src="imagens/familia/10.jpg" alt="Família 1" class="slide">
-                    <img src="imagens/familia/11.jpg" alt="Família 2" class="slide">
-                    <img src="imagens/familia/12.jpg" alt="Família 3" class="slide">
+                    <img src="imagens/familia/4.jpg" alt="Família 4" class="slide">
+                    <img src="imagens/familia/5.jpg" alt="Família 5" class="slide">
+                    <img src="imagens/familia/6.jpg" alt="Família 6" class="slide">
+                    <img src="imagens/familia/7.jpg" alt="Família 7" class="slide">
+                    <img src="imagens/familia/8.jpg" alt="Família 8" class="slide">
+                    <img src="imagens/familia/9.jpg" alt="Família 9" class="slide">
+                    <img src="imagens/familia/10.jpg" alt="Família 10" class="slide">
+                    <img src="imagens/familia/11.jpg" alt="Família 11" class="slide">
+                    <img src="imagens/familia/12.jpg" alt="Família 12" class="slide">
                 </div>
                 <button class="slide-btn next" data-target="familia">❯</button>
             </div>
@@ -114,8 +120,36 @@
                         <img src="imagens/namorado/1.jpg" alt="Namorado 1" class="slide active">
                         <img src="imagens/namorado/2.jpg" alt="Namorado 2" class="slide">
                         <img src="imagens/namorado/3.jpg" alt="Namorado 3" class="slide">
+                        <img src="imagens/namorado/4.jpg" alt="Namorado 4" class="slide">
+                        <img src="imagens/namorado/5.jpg" alt="Namorado 5" class="slide">
+                        <img src="imagens/namorado/6.jpg" alt="Namorado 6" class="slide">
+                        <img src="imagens/namorado/7.jpg" alt="Namorado 7" class="slide">
                     </div>
                 <button class="slide-btn next" data-target="namorado">❯</button>
+            </div>
+        </div>
+        <div id="album-aurorinha" class="album">
+            <div class="slider">
+                <button class="slide-btn prev" data-target="aurorinha">❮</button>
+                    <div class="slides" data-album-slides="aurorinha">
+                        <img src="imagens/aurorinha/1.jpeg" alt="aurorinha 1" class="slide active">
+                        <img src="imagens/aurorinha/2.jpeg" alt="aurorinha 2" class="slide">
+                        <img src="imagens/aurorinha/3.jpeg" alt="aurorinha 3" class="slide">
+                        <img src="imagens/aurorinha/4.jpeg" alt="aurorinha 4" class="slide">
+                        <img src="imagens/aurorinha/5.jpeg" alt="aurorinha 5" class="slide">
+                        <img src="imagens/aurorinha/6.jpeg" alt="aurorinha 6" class="slide">
+                        <img src="imagens/aurorinha/7.jpeg" alt="aurorinha 7" class="slide">
+                        <img src="imagens/aurorinha/8.jpeg" alt="aurorinha 8" class="slide">
+                        <img src="imagens/aurorinha/9.jpeg" alt="aurorinha 9" class="slide">
+                        <img src="imagens/aurorinha/10.jpeg" alt="aurorinha 10" class="slide">
+                        <img src="imagens/aurorinha/11.jpeg" alt="aurorinha 11" class="slide">
+                        <img src="imagens/aurorinha/12.jpeg" alt="aurorinha 12" class="slide">
+                        <img src="imagens/aurorinha/13.jpeg" alt="aurorinha 13" class="slide">
+                        <img src="imagens/aurorinha/14.jpeg" alt="aurorinha 14" class="slide">
+                        <img src="imagens/aurorinha/15.jpeg" alt="aurorinha 15" class="slide">
+                        <img src="imagens/aurorinha/16.jpeg" alt="aurorinha 16" class="slide">
+                    </div>
+                <button class="slide-btn next" data-target="aurorinha">❯</button>
             </div>
         </div>
     </section>

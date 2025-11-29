@@ -1,4 +1,9 @@
 // app.js
+
+// =================================================================
+// 1. NAVEGAÇÃO SPA (Single Page Application)
+// =================================================================
+
 const links = document.querySelectorAll('.navbar a');
 const pages = document.querySelectorAll('.page');
 
@@ -41,31 +46,16 @@ window.addEventListener('load', () => {
   }
 });
 
-// após o código da SPA
-const audio = document.getElementById('bg-music');
-const playBtn = document.getElementById('play-toggle');
+// =================================================================
+// 2. CORREÇÃO: PLAYER DE MÚSICA (Lógica Antiga Removida)
+// A nova lógica está no DOMContentLoaded abaixo.
+// =================================================================
 
-let isPlaying = false;
 
-playBtn.addEventListener('click', () => {
-  if (!isPlaying) {
-    audio.play();
-    playBtn.textContent = '⏸️'; // ícone de pausa
-    isPlaying = true;
-  } else {
-    audio.pause();
-    playBtn.textContent = '▶️'; // ícone de play
-    isPlaying = false;
-  }
-});
+// =================================================================
+// 3. ALTERNAR ÁLBUNS
+// =================================================================
 
-// opcional: se a música terminar, volta o botão para play
-audio.addEventListener('ended', () => {
-  playBtn.textContent = '▶️';
-  isPlaying = false;
-});
-
-// --- alternar álbuns (igual antes) ---
 const albumButtons = document.querySelectorAll('.album-btn');
 const albums = document.querySelectorAll('.album');
 
@@ -77,15 +67,19 @@ albumButtons.forEach(btn => {
     btn.classList.add('active-album');
 
     albums.forEach(a => {
+      // Usa toggle com o segundo argumento para ser mais limpo
       a.classList.toggle('active-album', a.id === `album-${target}`);
     });
   });
 });
 
-// --- carrossel com autoplay por álbum ---
-const slidersState = {};      // índice atual
-const slidersTimers = {};     // intervalo por álbum
-const SLIDE_INTERVAL = 4000;  // 4 segundos
+// =================================================================
+// 4. CARROSSEL COM AUTOPLAY
+// =================================================================
+
+const slidersState = {};      // índice atual
+const slidersTimers = {};     // intervalo por álbum
+const SLIDE_INTERVAL = 4000;  // 4 segundos
 
 function showSlideForAlbum(albumName, index) {
   const slidesContainer = document.querySelector(
@@ -166,10 +160,92 @@ document.querySelectorAll('.slider').forEach(slider => {
   slider.addEventListener('mouseleave', () => startAutoplay(albumName));
 });
 
+// =================================================================
+// 5. INICIALIZAÇÃO E PLAYER DE MÚSICA (Novo Seletor)
+// =================================================================
 
-// inicializa slides + autoplay
-showSlideForAlbum('familia', 0);
-showSlideForAlbum('namorado', 0);
-startAutoplay('familia');
-startAutoplay('namorado');
+document.addEventListener('DOMContentLoaded', () => {
+    const audioPlayer = document.getElementById('audio-player');
+    const musicToggleBtn = document.getElementById('music-toggle');
+    const musicListContainer = document.getElementById('music-list-container');
+    const musicList = document.getElementById('music-list');
 
+    // Inicialização do Carrossel/Autoplay
+    // Nota: Os nomes 'familia', 'namorado', 'aurorinha' devem bater com os data-album-slides no HTML
+    showSlideForAlbum('familia', 0);
+    showSlideForAlbum('namorado', 0);
+    showSlideForAlbum('aurorinha', 0);
+    startAutoplay('familia');
+    startAutoplay('namorado');
+    startAutoplay('aurorinha');
+
+    // Verifica se os elementos do player de música existem
+    if (!musicToggleBtn || !musicListContainer || !audioPlayer) {
+      console.error("ERRO: Elementos do player de música (botão, lista ou áudio) não encontrados no HTML. Verifique os IDs.");
+      return; // Interrompe o script do player se os elementos não existirem
+    }
+
+    // SUA LISTA DE MÚSICAS INTEGRADA
+    const playlist = [
+        { name: "Luan Santana - Te Vivo", src: "assets/Luan Santana-Te Vivo.mp3" },
+        { name: "Ilha", src: "assets/Ilha.mp3" },
+        { name: "Água com Açúcar", src: "assets/Agua com acucar.mp3" },
+        { name: "Te Esperando", src: "assets/Te esperando.mp3" },
+        { name: "Meteoro", src: "assets/Meteoro.mp3" }
+    ];
+    
+    // Define o texto inicial do botão
+    musicToggleBtn.textContent = 'Escolher Música';
+
+    // Popular a lista de músicas e adicionar listeners
+    playlist.forEach((song, index) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${index + 1}. ${song.name}`;
+        listItem.dataset.src = song.src; // Armazena o caminho do arquivo no elemento
+        musicList.appendChild(listItem);
+
+        // Lógica ao clicar na música (Tocar/Pausar/Trocar)
+        listItem.addEventListener('click', function() {
+            const newSrc = this.dataset.src;
+            
+            // Pega apenas o nome do arquivo para comparação (para evitar problemas de caminho absoluto vs relativo)
+            const newFileName = newSrc.split('/').pop(); 
+            const currentFileName = audioPlayer.src.split('/').pop();
+
+            // Verifica se a música atual é a mesma que está tocando
+            if (currentFileName === newFileName) { 
+                if (!audioPlayer.paused) {
+                    audioPlayer.pause();
+                    musicToggleBtn.textContent = `Pausado: ${song.name}`;
+                } else {
+                    audioPlayer.play();
+                    musicToggleBtn.textContent = `Tocando: ${song.name}`;
+                }
+            } else {
+                // Toca uma nova música
+                audioPlayer.src = newSrc;
+                audioPlayer.play()
+                    .then(() => {
+                        musicToggleBtn.textContent = `Tocando: ${song.name}`;
+                    })
+                    .catch(error => {
+                        console.error("Erro ao tentar tocar a música. Verifique o caminho:", error);
+                        alert(`Erro ao tocar a música: ${song.name}. Verifique a pasta 'assets'.`);
+                    });
+            }
+            // Esconde a lista após a seleção/ação
+            musicListContainer.classList.add('hidden'); 
+        });
+    });
+
+    // Alternar a visibilidade da lista ao clicar no botão
+    musicToggleBtn.addEventListener('click', () => {
+        musicListContainer.classList.toggle('hidden');
+    });
+
+    // Lógica opcional: se a música terminar, volta o botão para o texto inicial
+    audioPlayer.addEventListener('ended', () => {
+      musicToggleBtn.textContent = 'Escolher Música'; 
+    });
+
+});
